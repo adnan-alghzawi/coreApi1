@@ -23,6 +23,13 @@ namespace coreApi1.Server.Controllers
             var products = _context.Products.ToList();
             return Ok(products);
         }
+        //3 teir layer 1.presentation layer (controller) 2.business layer (service (interface and implementation)) 3.data layer (connect with database) 
+
+        //split it tow ways -> 1. i data service -->interface 
+
+        //                   , 2. data service
+        //                   , 3. data service implementation
+
 
         //get product by id
         [HttpGet("getProductById")]
