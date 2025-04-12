@@ -1,4 +1,6 @@
-﻿using coreApi1.Server.Models;
+﻿using coreApi1.Server.DataService;
+using coreApi1.Server.IDataService;
+using coreApi1.Server.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,26 +10,27 @@ namespace coreApi1.Server.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly MyDbContext _context;
+        private readonly IDataServicecs _dataService;
 
-        public CategoryController( MyDbContext db)
+        public CategoryController(IDataServicecs dataService)
         {
-            _context = db;
+            _dataService = dataService;
         }
 
         //read
         [HttpGet("getCateegories")]
         public IActionResult getCategories()
         {
-            var categories=_context.Categories.ToList();
+            var categories = _dataService.getCategories();
             return Ok(categories);
         }
 
         //get category by id
-        [HttpGet("getCateegoryById")]
+        [HttpGet("getCateegoryById/{id}")]
         public IActionResult getCategoryById(int id)
         {
-            var category = _context.Categories.FirstOrDefault(c => c.CategoryId == id);
+            //var category = _context.Categories.FirstOrDefault(c => c.CategoryId == id);
+            var category=_dataService.getCategoryById(id);
             if (category == null)
             {
                 return NotFound();
@@ -37,10 +40,11 @@ namespace coreApi1.Server.Controllers
 
 
         // get category by name
-        [HttpGet("getCateegoryByName")]
+        [HttpGet("getCateegoryByName/{name}")]
         public IActionResult getCategoryByName(string name)
         {
-            var categories = _context.Categories.Where(c => c.CategoryName == name).ToList();
+            //var categories = _context.Categories.Where(c => c.CategoryName == name).ToList();
+            var categories = _dataService.getCategoryByName(name);
             if (categories == null)
             {
                 return NotFound();
@@ -49,15 +53,41 @@ namespace coreApi1.Server.Controllers
         }
 
         // GET FIRST CATEGORY
-        [HttpGet("getFirstCategory")]
-        public IActionResult getFirstCategory()
+        //[HttpGet("getFirstCategory")]
+        //public IActionResult getFirstCategory()
+        //{
+        //    var category = _context.Categories.Take(1);
+        //    if (category == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(category);
+        //}
+        //delete category by id
+        //[HttpDelete("deleteCategory/{id}")]
+        //public bool deleteCategory(int id)
+        //{
+        //    //var category = _context.Categories.FirstOrDefault(c => c.CategoryId == id);
+        //    var category = _dataService.getCategoryById(id);
+        //    if (category == null)
+        //    {
+        //        return false;
+        //    }
+        //    _context.Categories.Remove(category);
+        //    _context.SaveChanges();
+        //    return true;
+        //}
+        [HttpDelete("deleteCategory")]
+        public bool deleteCategory(int id)
         {
-            var category = _context.Categories.Take(1);
+            var category = _dataService.deleteCategory(id);
+
             if (category == null)
             {
-                return NotFound();
+                return false;
             }
-            return Ok(category);
+            return true;
+
         }
 
     }

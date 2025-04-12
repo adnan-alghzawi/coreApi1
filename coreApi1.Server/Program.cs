@@ -1,3 +1,5 @@
+//using coreApi1.Server.DataService;
+//using coreApi1.Server.IDataService;
 using coreApi1.Server.DataService;
 using coreApi1.Server.IDataService;
 using coreApi1.Server.Models;
@@ -16,7 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("YourConnectionString")));
 
-builder.Services.AddScoped<IdataService, DataService>();
+builder.Services.AddScoped<IDataServicecs, DataService>();
 
 builder.Services.AddCors(options =>
 {

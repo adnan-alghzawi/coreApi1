@@ -1,16 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Category } from '../category/category.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdnanService {
 
-  constructor(private http : HttpClient) { }
+  //https://localhost:7024/api/Product/getProducts
+  //  https://localhost:7024/api/Category/getCateegories
 
-  getAllCategories() {
-    return this.http.get<Category[]>('https://localhost:7024/api/C1/getCategories');
+  constructor(private _url: HttpClient) { }
+  getProducts() {
+    return this._url.get('https://localhost:7024/api/Product/getProducts');
   }
-  
+  getCategories() {
+    return this._url.get('https://localhost:7024/api/Category/getCateegories');
+  }
+
 }

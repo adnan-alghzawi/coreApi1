@@ -9,33 +9,30 @@ namespace coreApi1.Server.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly MyDbContext _context;
-        public ProductController(MyDbContext db)
+        //private readonly MyDbContext _context;
+        //public ProductController(MyDbContext db)
+        //{
+        //    _context = db;
+        //}
+        private readonly coreApi1.Server.IDataService.IDataServicecs _dataService;
+        public ProductController(coreApi1.Server.IDataService.IDataServicecs dataService)
         {
-            _context = db;
+            _dataService = dataService;
         }
-
         //get all products
 
         [HttpGet("getProducts")]
         public IActionResult getProducts()
         {
-            var products = _context.Products.ToList();
+            var products = _dataService.getProducts();
             return Ok(products);
         }
-        //3 teir layer 1.presentation layer (controller) 2.business layer (service (interface and implementation)) 3.data layer (connect with database) 
-
-        //split it tow ways -> 1. i data service -->interface 
-
-        //                   , 2. data service
-        //                   , 3. data service implementation
-
-
+      
         //get product by id
         [HttpGet("getProductById")]
         public IActionResult getProductById(int id)
         {
-            var product = _context.Products.FirstOrDefault(c => c.ProductId == id);
+            var product = _dataService.getProductById(id);
             if (product == null)
             {
                 return NotFound();
@@ -47,7 +44,7 @@ namespace coreApi1.Server.Controllers
         [HttpGet("getProductByName")]
         public IActionResult getProductByName(string name)
         {
-            var products = _context.Products.Where(c => c.ProductName == name).ToList();
+            var products = _dataService.getProductByName(name);
             if (products == null)
             {
                 return NotFound();
@@ -56,15 +53,35 @@ namespace coreApi1.Server.Controllers
         }
 
         // GET FIRST PRODUCT
-        [HttpGet("getFirstProduct")]
-        public IActionResult getFirstProduct()
+        //[HttpGet("getFirstProduct")]
+        //public IActionResult getFirstProduct()
+        //{
+        //    var product = _context.Products.Take(1);
+        //    if (product == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(product);
+        //}
+
+        //delete product by id
+
+        [HttpDelete("deleteProductById")]
+        public bool deleteProduct(int id)
         {
-            var product = _context.Products.Take(1);
+            var product = _dataService.deleteProduct(id);
             if (product == null)
             {
-                return NotFound();
+                return false;
             }
-            return Ok(product);
+            return true;
         }
     }
 }
+//3 teir layer 1.presentation layer (controller) 2.business layer (service (interface and implementation)) 3.data layer (connect with database) 
+
+//split it tow ways -> 1. i data service -->interface 
+
+//                   , 2. data service
+//                   , 3. data service implementation
+
