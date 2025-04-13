@@ -1,4 +1,5 @@
-﻿using coreApi1.Server.IDataService;
+﻿using coreApi1.Server.DTO;
+using coreApi1.Server.IDataService;
 using coreApi1.Server.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -75,6 +76,64 @@ namespace coreApi1.Server.DataService
             _context.Products.Remove(product);
             _context.SaveChanges();
             return true;
+        }
+
+        //add category
+        //public bool addCategory(Category category)
+        //{
+        //    if (category == null)
+        //    {
+        //        return false;
+        //    }
+        //    _context.Categories.Add(category);
+        //    _context.SaveChanges();
+        //    return true;
+        //}
+
+        //add product
+        public bool addProduct(Product product)
+        {
+            if (product == null)
+            {
+                return false;
+            }
+            _context.Products.Add(product);
+            _context.SaveChanges();
+            return true;
+        }
+
+        // update category by id
+        public bool updateCategory(int id, Category category)
+        {
+            var existingCategory = _context.Categories.FirstOrDefault(c => c.CategoryId == id);
+            if (existingCategory == null)
+            {
+                return false;
+            }
+            existingCategory.CategoryName = category.CategoryName;
+            existingCategory.CategoryDescription = category.CategoryDescription;
+            _context.SaveChanges();
+            return true;
+        }
+
+        public bool addCategory(AddCategoryRequest acr)
+        {
+            if (acr == null)
+            {
+                return false;
+            }
+            else
+            {
+                var category = new Category
+                {
+                    CategoryName=acr.CategoryName,
+                    CategoryDescription=acr.CategoryDescription
+                };
+                _context.Categories.Add(category);
+                _context.SaveChanges();
+                return true;
+            }
+
         }
 
     }

@@ -27,7 +27,7 @@ namespace coreApi1.Server.Controllers
             var products = _dataService.getProducts();
             return Ok(products);
         }
-      
+
         //get product by id
         [HttpGet("getProductById")]
         public IActionResult getProductById(int id)
@@ -75,6 +75,25 @@ namespace coreApi1.Server.Controllers
                 return false;
             }
             return true;
+        }
+
+        //add product from form
+        [HttpPost("addProduct")]
+        public IActionResult addProduct([FromForm] Product product)
+        {
+            if (product == null)
+            {
+                return BadRequest();
+            }
+            var result = _dataService.addProduct(product);
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }
