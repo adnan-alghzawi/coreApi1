@@ -25,6 +25,10 @@ export class AdnanService {
   deleteCategory(id: any) {
     return this._url.delete(`https://localhost:7024/api/Category/deleteCategory/${id}`);
   }
+  
+  getCategoryById(id: any) {
+    return this._url.get(`https://localhost:7024/api/Category/getCateegoryById/${id}`);
+  }
 
 
 }

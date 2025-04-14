@@ -2,6 +2,11 @@
   All Categories
 </p>
 
+
+<!--<a [routerLink]="['/addCategory']" class="btn btn-success">Add</a>-->
+<a routerLink="/addCategory" class="btn btn-success">Add</a>
+
+
 <div class="container">
   <table class="table table-bordered table-hover text-center align-middle">
     <thead class="table-dark">
@@ -11,6 +16,8 @@
         <th>Description</th>
         <th>EDIT</th>
         <th>DELETE</th>
+        <th>DETAILS</th>
+
 
       </tr>
     </thead>
@@ -27,6 +34,10 @@
         <td>
           <button (click)="deleteCategoryById(item.categoryId)" class="btn btn-danger">Delete</button>
         </td>
+        <td>
+          <a [routerLink]="['/categoryDetails', item.categoryId]" class="btn btn-info">Details</a>
+        </td>
+
       </tr>
     </tbody>
 

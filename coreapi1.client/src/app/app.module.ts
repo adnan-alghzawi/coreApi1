@@ -9,6 +9,8 @@ import { AllProductsComponent } from './all-products/all-products.component';
 import { EditCategoryComponent } from './edit-category/edit-category.component';
 //import { CategoryComponent } from './category/category.component';
 import { FormsModule } from '@angular/forms';
+import { AddCategoryComponent } from './add-category/add-category.component';
+import { CategoryDetailsComponent } from './category-details/category-details.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { FormsModule } from '@angular/forms';
     AllCategoriesComponent,
     AllProductsComponent,
     EditCategoryComponent,
+    AddCategoryComponent,
+    CategoryDetailsComponent,
     //CategoryComponent
   ],
   imports: [

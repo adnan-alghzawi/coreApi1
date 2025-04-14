@@ -1,0 +1,9 @@
+<p>add-category works!</p>
+
+
+
+<form (ngSubmit)="addCategory()">
+  <input type="text" [(ngModel)]="categoryName" name="categoryName" class="form-control" placeholder="Enter Name" />
+  <input type="text" [(ngModel)]="categoryDescription" name="categoryDescription" class="form-control" placeholder="Enter Description" />
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>

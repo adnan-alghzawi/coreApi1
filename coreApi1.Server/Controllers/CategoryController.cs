@@ -106,7 +106,7 @@ namespace coreApi1.Server.Controllers
         //}
 
         [HttpPost("addCategories")]
-        public IActionResult addCategoryt([FromForm] AddCategoryRequest addCategory )
+        public IActionResult addCategoryt([FromBody] AddCategoryRequest addCategory )
         {
             if(addCategory==null)
             {
