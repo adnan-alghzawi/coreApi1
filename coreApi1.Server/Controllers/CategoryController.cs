@@ -65,6 +65,7 @@ namespace coreApi1.Server.Controllers
         //    return Ok(category);
         //}
         //delete category by id
+
         //[HttpDelete("deleteCategory/{id}")]
         //public bool deleteCategory(int id)
         //{
