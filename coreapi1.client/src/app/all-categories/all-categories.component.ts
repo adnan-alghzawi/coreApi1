@@ -21,5 +21,12 @@ export class AllCategoriesComponent {
 
     })
   }
+  
+  deleteCategoryById(id: any) {
+    this._ser.deleteCategory(id).subscribe(() => {
+      alert("Deleted");
+      this.getAllCategories();
+    });
+  }
 
 }

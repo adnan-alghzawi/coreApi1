@@ -1,0 +1,13 @@
+<p>edit-category works!</p>
+
+<form #edit="ngForm" (ngSubmit)="editCategory(edit.value)">
+  <div class="form-group">
+    <input type="text" class="form-control"  placeholder="Enter Name" ngModel name="CategoryName">
+    
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control"  placeholder="Enter Description" ngModel name="CategoryDescription">
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Edit</button>
+</form>

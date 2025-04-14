@@ -64,8 +64,9 @@ namespace coreApi1.Server.Controllers
         //    }
         //    return Ok(category);
         //}
-        //delete category by id
 
+
+        //delete category by id
         //[HttpDelete("deleteCategory/{id}")]
         //public bool deleteCategory(int id)
         //{
@@ -79,7 +80,7 @@ namespace coreApi1.Server.Controllers
         //    _context.SaveChanges();
         //    return true;
         //}
-        [HttpDelete("deleteCategory")]
+        [HttpDelete("deleteCategory/{id}")]
         public bool deleteCategory(int id)
         {
             var category = _dataService.deleteCategory(id);
@@ -89,8 +90,8 @@ namespace coreApi1.Server.Controllers
                 return false;
             }
             return true;
-
         }
+
 
         //add category from body
         //[HttpPost("addCategory")]
@@ -105,11 +106,11 @@ namespace coreApi1.Server.Controllers
         //}
 
         [HttpPost("addCategories")]
-        public IActionResult addCategoryt([FromBody] AddCategoryRequest addCategory )
+        public IActionResult addCategoryt([FromForm] AddCategoryRequest addCategory )
         {
             if(addCategory==null)
             {
-return BadRequest();
+                    return BadRequest();
             }
             else
             {
@@ -127,7 +128,7 @@ return BadRequest();
 
         // update category by id
         [HttpPut("updateCategory/{id}")]
-        public IActionResult updateCategory(int id, [FromBody] Category category)
+        public IActionResult updateCategory(int id, [FromForm] Category category)
         {
             if (category == null)
             {

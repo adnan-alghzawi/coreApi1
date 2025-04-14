@@ -6,18 +6,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AllCategoriesComponent } from './all-categories/all-categories.component';
 import { AllProductsComponent } from './all-products/all-products.component';
+import { EditCategoryComponent } from './edit-category/edit-category.component';
 //import { CategoryComponent } from './category/category.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     AllCategoriesComponent,
     AllProductsComponent,
+    EditCategoryComponent,
     //CategoryComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule, FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
