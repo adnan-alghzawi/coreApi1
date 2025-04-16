@@ -136,5 +136,29 @@ namespace coreApi1.Server.DataService
 
         }
 
+        public bool Register(RegisterDTO registerDTO)
+        {
+            var user=_context.Users.FirstOrDefault(u => u.Email == registerDTO.Email);
+
+            if (user != null)
+            {
+                return false;
+            }
+            else
+            {
+                var newUser = new User
+                {
+                    Name = registerDTO.Name,
+                    
+                    Email = registerDTO.Email,
+                    Password = registerDTO.Password
+                };
+                _context.Users.Add(newUser);
+                _context.SaveChanges();
+                return true;
+            }
+        }
+
+       
     }
 }

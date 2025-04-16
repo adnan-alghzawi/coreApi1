@@ -20,6 +20,9 @@ namespace coreApi1.Server.IDataService
         public bool deleteProduct(int id);
         public bool addProduct(Product product);
         public bool addCategory(AddCategoryRequest acr);
+
+
+        public bool Register(RegisterDTO registerDTO);
     }
 
    
